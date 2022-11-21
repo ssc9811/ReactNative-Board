@@ -1,19 +1,20 @@
+import {View, Text} from 'react-native';
 import React from 'react';
-import {Text, View} from 'react-native';
 import styled from 'styled-components/native';
 
 const TView = styled.View`
-  background-color: red;
+  background-color: #ba3030;
   width: 100px;
   height: 100px;
 `;
-const App = () => {
+
+const main = () => {
   return (
     <View>
+      <Text>main</Text>
       <TView />
-      <Text>임시</Text>
     </View>
   );
 };
 
-export default App;
+export default main;
