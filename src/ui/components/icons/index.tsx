@@ -1,5 +1,6 @@
 import GradationBottom from '../../../assets/images/icons/GradationBottom.svg';
 import GradationTop from '../../../assets/images/icons/GradationTop.svg';
+import Prev from '../../../assets/images/icons/Prev.svg';
 
 import React from 'react';
 import styled from 'styled-components/native';
@@ -10,14 +11,16 @@ const IconContainer = styled.View`
   align-items: center;
 `;
 
-const Icons = {
+export const Icons = {
   GradationBottom,
   GradationTop,
+  Prev,
 } as const;
 
-const AppIcon = {
+export const AppIcon = {
   GradationBottom: <GradationBottom />,
   GradationTop: <GradationTop />,
+  Prev: <Prev />,
 } as const;
 export type AppIconType = typeof AppIcon[keyof typeof AppIcon];
 
@@ -25,6 +28,7 @@ type IconsProps = {
   icon: AppIconType;
   containerWidth?: number;
   containerHeight?: number;
+  radius?: number;
   iconWidth?: number;
   iconHeight?: number;
   margin?: marginType;
@@ -35,6 +39,7 @@ export function AppIcons({
   icon,
   containerWidth = 32,
   containerHeight = 32,
+  radius = 0,
   margin = {
     marginBottom: 0,
     marginLeft: 0,
@@ -55,6 +60,7 @@ export function AppIcons({
               marginBottom: margin.marginBottom,
               marginLeft: margin.marginLeft,
               marginRight: margin.marginRight,
+              borderRadius: radius,
             }}>
             {icon}
           </IconContainer>
@@ -68,6 +74,7 @@ export function AppIcons({
             marginBottom: margin.marginBottom,
             marginLeft: margin.marginLeft,
             marginRight: margin.marginRight,
+            borderRadius: radius,
           }}>
           {icon}
         </IconContainer>

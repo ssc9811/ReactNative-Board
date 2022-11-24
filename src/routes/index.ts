@@ -2,7 +2,7 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 export type MainStackParamList = {
   Home: undefined;
-  Calendar: undefined;
+  StatusBarGradation: undefined;
   Map: undefined;
   Picker: undefined;
   InputAnimation: undefined;

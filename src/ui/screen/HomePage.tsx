@@ -12,9 +12,9 @@ const HomePage = () => {
   const navigation = useNavigation<MainNavigationProp>();
   const ScrollLists = [
     {
-      name: 'Calendar',
+      name: 'StatusBarGradation',
       onPress: () => {
-        navigation.navigate('Calendar');
+        navigation.navigate('StatusBarGradation');
         // navigation.navigate(this.name); this를 사용할 순 없나 ?
       },
     },

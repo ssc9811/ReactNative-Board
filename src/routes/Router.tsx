@@ -2,7 +2,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 import {MainStackParamList} from '.';
-import CalendarPage from '../ui/screen/CalendarPage';
+import StatusBarGradationPage from '../ui/screen/StatusBarGradationPage';
 import HomePage from '../ui/screen/HomePage';
 import InputAnimationPage from '../ui/screen/InputAnimationPage';
 import MapPage from '../ui/screen/MapPage';
@@ -22,8 +22,8 @@ const MainStackNavigator = () => {
     <MainStack.Navigator initialRouteName="Home">
       <MainStack.Screen name={'Home'} component={HomePage} />
       <MainStack.Screen
-        name={'Calendar'}
-        component={CalendarPage}
+        name={'StatusBarGradation'}
+        component={StatusBarGradationPage}
         options={{headerShown: false}}
       />
       <MainStack.Screen name={'Map'} component={MapPage} />
