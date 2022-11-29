@@ -6,6 +6,7 @@ export type MainStackParamList = {
   Map: undefined;
   Picker: undefined;
   InputAnimation: undefined;
+  Animation: undefined;
 };
 
 export type MainNavigationProp = NativeStackNavigationProp<MainStackParamList>;

@@ -36,6 +36,12 @@ const HomePage = () => {
         navigation.navigate('InputAnimation');
       },
     },
+    {
+      name: 'Animation',
+      onPress: () => {
+        navigation.navigate('Animation');
+      },
+    },
   ];
 
   return (

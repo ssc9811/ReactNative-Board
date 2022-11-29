@@ -7,6 +7,7 @@ import HomePage from '../ui/screen/HomePage';
 import InputAnimationPage from '../ui/screen/InputAnimationPage';
 import MapPage from '../ui/screen/MapPage';
 import PickerPage from '../ui/screen/PickerPage';
+import AnimationPage from '../ui/screen/AnimationPage';
 
 const Router = () => {
   return (
@@ -31,6 +32,11 @@ const MainStackNavigator = () => {
       <MainStack.Screen
         name={'InputAnimation'}
         component={InputAnimationPage}
+      />
+      <MainStack.Screen
+        name={'Animation'}
+        component={AnimationPage}
+        options={{headerShown: false}}
       />
     </MainStack.Navigator>
   );
