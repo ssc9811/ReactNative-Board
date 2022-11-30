@@ -31,9 +31,9 @@ const HomePage = () => {
       },
     },
     {
-      name: 'InputAnimation',
+      name: 'FigureAnimation',
       onPress: () => {
-        navigation.navigate('InputAnimation');
+        navigation.navigate('FigureAnimation');
       },
     },
     {

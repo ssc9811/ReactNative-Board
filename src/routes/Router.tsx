@@ -4,7 +4,7 @@ import React from 'react';
 import {MainStackParamList} from '.';
 import StatusBarGradationPage from '../ui/screen/StatusBarGradationPage';
 import HomePage from '../ui/screen/HomePage';
-import InputAnimationPage from '../ui/screen/InputAnimationPage';
+import FigureAnimationPage from '../ui/screen/FigureAnimationPage';
 import MapPage from '../ui/screen/MapPage';
 import PickerPage from '../ui/screen/PickerPage';
 import AnimationPage from '../ui/screen/AnimationPage';
@@ -30,8 +30,8 @@ const MainStackNavigator = () => {
       <MainStack.Screen name={'Map'} component={MapPage} />
       <MainStack.Screen name={'Picker'} component={PickerPage} />
       <MainStack.Screen
-        name={'InputAnimation'}
-        component={InputAnimationPage}
+        name={'FigureAnimation'}
+        component={FigureAnimationPage}
       />
       <MainStack.Screen
         name={'Animation'}
