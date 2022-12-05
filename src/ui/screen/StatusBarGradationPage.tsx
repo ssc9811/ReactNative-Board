@@ -1,12 +1,13 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
+  Animated,
   NativeScrollEvent,
   NativeSyntheticEvent,
   StatusBar,
   Text,
 } from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
-import styled from 'styled-components/native';
+import styled, {css} from 'styled-components/native';
 import {AppIcon, AppIcons} from '../components/icons';
 import GradationBottom from '../../assets/images/icons/GradationBottom.svg';
 import {getStatusBarHeight} from 'react-native-status-bar-height';
@@ -23,25 +24,38 @@ type HeaderIconsProps = {
   hasStatusBar: boolean;
 };
 
-const HeaderIcons = styled.View<HeaderIconsProps>`
+const HeaderIcons = styled(Animated.View)<HeaderIconsProps>`
   position: absolute;
   // android, iOS 일때 비교 필요
-  margin-top: ${props => (props.hasStatusBar ? 47 : 0)}px;
-  z-index: 99999;
+  margin-top: ${props => (props.hasStatusBar ? StatusBar.currentHeight : 0)}px;
+  /* margin-top: ${StatusBar.currentHeight}; */
   width: ${windowWidth};
   flex-direction: row;
   justify-content: space-between;
-  padding: 12px 20px;
+  padding: 12px 20px 12px 20px;
+  padding-top: ${props => (props.hasStatusBar ? 0 : StatusBar.currentHeight)}px;
+  ${props => {
+    if (props.hasStatusBar) {
+      return css`
+        background-color: transparent;
+      `;
+    } else {
+      return css`
+        background-color: white;
+      `;
+    }
+  }}
   align-items: center;
+  z-index: 999999;
 `;
 
 const HeaderLeft = styled.View`
-  z-index: 99999;
+  z-index: 999999;
 `;
 
 const HeaderRight = styled.View`
+  z-index: 999999;
   flex-direction: row;
-  z-index: 99999;
 `;
 
 const ImageContainer = styled.View`
@@ -54,7 +68,6 @@ const ExampleImage = styled.Image`
 
 const ImageBackground = styled.View`
   position: absolute;
-  border: solid 1px black;
   border-bottom-left-radius: 30px;
   border-bottom-right-radius: 30px;
 `;
@@ -69,10 +82,13 @@ const EmptyBox = styled.View<EmptyBoxProps>`
   background-color: ${props => props.bgColor};
 `;
 
-const CalendarPage = () => {
+const StatusBarGradationPage = () => {
   const scrollRef = useRef<ScrollView | null>(null);
   const [spot, setSpot] = useState<number>(0);
   const STATUS_EVENT = spot < 300;
+  const titleShowAnimation = useRef(new Animated.Value(0)).current;
+
+  StatusBar.setTranslucent(true);
   StatusBar.setBackgroundColor('transparent');
   if (STATUS_EVENT) {
     StatusBar.setTranslucent(true);
@@ -87,43 +103,66 @@ const CalendarPage = () => {
     const scrollMovementDirectionScrollMovement: number = Math.round(
       e.nativeEvent.contentOffset.y,
     );
+
     setSpot(scrollMovementDirectionScrollMovement);
   };
 
-  const insets = useSafeAreaInsets();
+  useEffect(() => {
+    if (spot < 280) {
+      console.log('spot < 280');
+      Animated.timing(titleShowAnimation, {
+        toValue: 0,
+        useNativeDriver: true,
+      }).start();
+    } else {
+      console.log('spot > 280');
+      Animated.timing(titleShowAnimation, {
+        toValue: 1,
+        useNativeDriver: true,
+      }).start();
+    }
+  }, [spot]);
 
-  console.log('StatusBar.currentHeight', StatusBar.currentHeight);
-  console.log('getStatusBarHeight()', getStatusBarHeight());
-  console.log('insets', insets.top);
+  // const insets = useSafeAreaInsets();
+
+  // console.log('StatusBar.currentHeight', StatusBar.currentHeight);
+  // console.log('getStatusBarHeight()', getStatusBarHeight());
+  // console.log('insets', insets.top);
+
+  // const boxInterpolation = titleShowAnimation.interpolate({
+  //   inputRange: [0, 1],
+  //   outputRange: ['rgb(90,210,244)', 'rgb(224,82,99)'],
+  // });
+  // const animatedStyle = {
+  //   backgroundColor: boxInterpolation,
+  // };
 
   return (
-    <MainContainer isNotch={STATUS_EVENT ? false : true}>
+    <MainContainer>
       <>
+        <StatusBar animated={true} />
         <HeaderContainer>
           <HeaderIcons hasStatusBar={STATUS_EVENT}>
             <HeaderLeft>
               <AppIcons
-                icon={AppIcon.Prev}
+                icon={STATUS_EVENT ? AppIcon.PrevWhite : AppIcon.PrevBlack}
                 onPress={() => console.log('clicked')}
               />
             </HeaderLeft>
             {!STATUS_EVENT && (
-              <Text style={{fontSize: 20, fontWeight: '700', color: 'white'}}>
-                임시 헤더 Text
+              <Text style={{fontSize: 20, fontWeight: '700', color: 'black'}}>
+                Title
               </Text>
             )}
             <HeaderRight>
               <AppIcons
-                icon={AppIcon.Prev}
-                onPress={() => console.log('clicked')}
-              />
-              <AppIcons
-                icon={AppIcon.Prev}
+                icon={STATUS_EVENT ? AppIcon.PrevWhite : AppIcon.PrevBlack}
                 onPress={() => console.log('clicked')}
               />
             </HeaderRight>
           </HeaderIcons>
         </HeaderContainer>
+
         <ScrollView ref={scrollRef} onScroll={handleDayOnScroll}>
           <ImageContainer>
             <ExampleImage
@@ -146,26 +185,14 @@ const CalendarPage = () => {
             </ImageBackground>
           </ImageContainer>
 
-          <EmptyBox bgColor="black" />
-          <EmptyBox bgColor="red" />
-          <EmptyBox bgColor="green" />
-          <EmptyBox bgColor="yellow" />
-          <EmptyBox bgColor="black" />
-          <EmptyBox bgColor="yellow" />
-          <EmptyBox bgColor="red" />
-          <EmptyBox bgColor="green" />
-          <TextView>
-            <GradationBottom style={{borderRadius: 200}} />
-          </TextView>
+          <EmptyBox bgColor="#a29bfe" />
+          <EmptyBox bgColor="#6c5ce7" />
+          <EmptyBox bgColor="#fd79a8" />
+          <EmptyBox bgColor="#e84393" />
         </ScrollView>
       </>
     </MainContainer>
   );
 };
 
-export default CalendarPage;
-
-const TextView = styled.View`
-  border: solid 1px black;
-  border-radius: 300px;
-`;
+export default StatusBarGradationPage;

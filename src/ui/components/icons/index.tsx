@@ -1,6 +1,7 @@
 import GradationBottom from '../../../assets/images/icons/GradationBottom.svg';
 import GradationTop from '../../../assets/images/icons/GradationTop.svg';
-import Prev from '../../../assets/images/icons/Prev.svg';
+import PrevWhite from '../../../assets/images/icons/Prev_white.svg';
+import PrevBlack from '../../../assets/images/icons/Prev_black.svg';
 
 import React from 'react';
 import styled from 'styled-components/native';
@@ -14,13 +15,15 @@ const IconContainer = styled.View`
 export const Icons = {
   GradationBottom,
   GradationTop,
-  Prev,
+  PrevWhite,
+  PrevBlack,
 } as const;
 
 export const AppIcon = {
   GradationBottom: <GradationBottom />,
   GradationTop: <GradationTop />,
-  Prev: <Prev />,
+  PrevWhite: <PrevWhite />,
+  PrevBlack: <PrevBlack />,
 } as const;
 export type AppIconType = typeof AppIcon[keyof typeof AppIcon];
 

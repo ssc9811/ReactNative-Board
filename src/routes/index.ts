@@ -7,6 +7,9 @@ export type MainStackParamList = {
   Picker: undefined;
   FigureAnimation: undefined;
   Animation: undefined;
+  PhotoWithTimestamp: undefined;
+  FirebaseTest: undefined;
+  Calendar: undefined;
 };
 
 export type MainNavigationProp = NativeStackNavigationProp<MainStackParamList>;

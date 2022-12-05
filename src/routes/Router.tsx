@@ -8,6 +8,9 @@ import FigureAnimationPage from '../ui/screen/FigureAnimationPage';
 import MapPage from '../ui/screen/MapPage';
 import PickerPage from '../ui/screen/PickerPage';
 import AnimationPage from '../ui/screen/AnimationPage';
+import PhotoWithTimestampPage from '../ui/screen/PhotoWithTimestampPage';
+import FirebaseTestPage from '../ui/screen/FirebaseTestPage';
+import CalendarPage from '../ui/screen/CalendarPage';
 
 const Router = () => {
   return (
@@ -38,6 +41,12 @@ const MainStackNavigator = () => {
         component={AnimationPage}
         options={{headerShown: false}}
       />
+      <MainStack.Screen
+        name={'PhotoWithTimestamp'}
+        component={PhotoWithTimestampPage}
+      />
+      <MainStack.Screen name="FirebaseTest" component={FirebaseTestPage} />
+      <MainStack.Screen name="Calendar" component={CalendarPage} />
     </MainStack.Navigator>
   );
 };

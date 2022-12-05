@@ -52,15 +52,15 @@ const AnimationPage = () => {
       <>
         <Title>
           <TitleLeft>
-            <AppIcons icon={AppIcon.Prev} />
-            <AppIcons icon={AppIcon.Prev} />
+            <AppIcons icon={AppIcon.PrevWhite} />
+            <AppIcons icon={AppIcon.PrevWhite} />
           </TitleLeft>
           <TitleCenter>
             <MainText>Center Center Center</MainText>
           </TitleCenter>
           <TitleRight>
-            <AppIcons icon={AppIcon.Prev} />
-            <AppIcons icon={AppIcon.Prev} />
+            <AppIcons icon={AppIcon.PrevWhite} />
+            <AppIcons icon={AppIcon.PrevWhite} />
           </TitleRight>
         </Title>
         <Header>
