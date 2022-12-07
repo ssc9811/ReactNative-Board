@@ -1,20 +1,51 @@
-import {Text} from 'react-native';
-import React from 'react';
+import {Modal, Text} from 'react-native';
+import React, {Dispatch, SetStateAction, useState} from 'react';
 import {Calendar} from 'react-native-calendars';
 import {LocaleConfig} from 'react-native-calendars';
 import styled from 'styled-components/native';
+import moment, {MomentInput} from 'moment';
+import DatePicker from 'react-native-date-picker';
+import {windowWidth} from '../../utils/globalStyle/styleDefine';
 
-const CalenderContainer = styled.View`
+const CalenderContainer = styled.View``;
+
+const ModalBackground = styled.View`
   flex: 1;
-  border: solid 1px black;
+  background-color: rgba(0, 0, 0, 0.2);
+  justify-content: flex-end;
 `;
 
-const TitleText = styled.Text`
-  font-size: 18px;
-  color: black;
+const ModalContainer = styled.View`
+  background-color: #fff;
+  padding: 20px 0px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  align-items: center;
+`;
+
+const ButtonArea = styled.View`
+  width: ${windowWidth};
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0px 50px;
+`;
+
+const Button = styled.TouchableOpacity`
+  padding: 12px 20px;
+  width: 120px;
+  border-radius: 12px;
+  border: solid 1px black;
+  justify-content: center;
+  align-items: center;
 `;
 
 const CalendarPage = () => {
+  const [dateValue, setDateValue] = useState<MomentInput>(moment());
+  const [modalOpen, setModalOpen] = useState(false);
+  const [date, setDate] = useState(new Date());
+
+  console.log('dateValue', dateValue, '||| date', date);
+
   LocaleConfig.locales.fr = {
     monthNames: [
       '1월',
@@ -43,88 +74,112 @@ const CalendarPage = () => {
   };
 
   return (
-    <CalenderContainer>
-      <Calendar
-        initialDate={'2022-12-12'}
-        month={12}
-        // Initially visible month. Default = now
-        // initialDate={'2012-03-01'}
-        // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
-        // minDate={'2012-05-10'}
-        // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
-        // maxDate={'2012-05-30'}
-        // Handler which gets executed on day press. Default = undefined
-        onDayPress={day => {
-          console.log('selected day', day);
-        }}
-        // Handler which gets executed on day long press. Default = undefined
-        onDayLongPress={day => {
-          console.log('selected day', day);
-        }}
-        // Month format in calendar title. Formatting values: http://arshaw.com/xdate/#Formatting
-        monthFormat={'MM yyyy'}
-        // Handler which gets executed when visible month changes in calendar. Default = undefined
-        onMonthChange={month => {
-          console.log('month changed', month);
-        }}
-        // Hide month navigation arrows. Default = false
-        hideArrows={false}
-        // Replace default arrows with custom ones (direction can be 'left' or 'right')
-        renderArrow={direction => <Arrow direction={direction} />}
-        // Do not show days of other months in month page. Default = false
-        hideExtraDays={false}
-        // If hideArrows = false and hideExtraDays = false do not switch month when tapping on greyed out
-        // day from another month that is visible in calendar page. Default = false
-        disableMonthChange={true}
-        // If firstDay=1 week starts from Monday. Note that dayNames and dayNamesShort should still start from Sunday
-        firstDay={1}
-        // Hide day names. Default = false
-        // hideDayNames={true}
-        // Show week numbers to the left. Default = false
-        // showWeekNumbers={true}
-        // Handler which gets executed when press arrow icon left. It receive a callback can go back month
-        onPressArrowLeft={subtractMonth => subtractMonth()}
-        // Handler which gets executed when press arrow icon right. It receive a callback can go next month
-        onPressArrowRight={addMonth => addMonth()}
-        // Disable left arrow. Default = false
-        disableArrowLeft={false}
-        // Disable right arrow. Default = false
-        disableArrowRight={false}
-        // Disable all touch events for disabled days. can be override with disableTouchEvent in markedDates
-        disableAllTouchEventsForDisabledDays={true}
-        // Replace default month and year title with custom one. the function receive a date as parameter
-        renderHeader={date => <HeaderComponent date={date} />}
-        // Enable the option to swipe between months. Default = false
-        enableSwipeMonths={true}
-      />
-    </CalenderContainer>
+    <>
+      <CalenderContainer>
+        <Calendar
+          initialDate={moment(dateValue).format('yyyy-MM-DD')}
+          theme={{
+            selectedDayBackgroundColor: '#0063c9',
+            todayTextColor: '#0063c9',
+            dotColor: '#0063c9',
+            arrowColor: '#0063c9',
+          }}
+          minDate={moment().format('yyyy-MM-DD')}
+          onDayPress={day => {
+            setDateValue(moment(day.dateString));
+          }}
+          monthFormat={'yyyy년 MM월'}
+          onMonthChange={month => {
+            console.log('month changed', month);
+          }}
+          disableMonthChange={true}
+          onPressArrowLeft={() =>
+            setDateValue(moment(dateValue).subtract(1, 'M'))
+          }
+          onPressArrowRight={() => setDateValue(moment(dateValue).add(1, 'M'))}
+          disableArrowLeft={false}
+          disableArrowRight={false}
+          disableAllTouchEventsForDisabledDays={true}
+          renderHeader={() => (
+            <HeaderComponent
+              dateValue={moment(dateValue).format('yyyy년 MM월')}
+              setModalOpen={setModalOpen}
+              fromNow={moment(dateValue).diff(moment(), 'days')}
+            />
+          )}
+          enableSwipeMonths={true}
+        />
+      </CalenderContainer>
+
+      <Modal visible={modalOpen} transparent={true}>
+        <ModalBackground>
+          <ModalContainer>
+            <DatePicker
+              date={date}
+              onDateChange={setDate}
+              androidVariant="nativeAndroid"
+              mode={'date'}
+              dividerHeight={1}
+            />
+            <ButtonArea>
+              <Button onPress={() => setModalOpen(false)}>
+                <Text>아니요</Text>
+              </Button>
+              <Button
+                onPress={() => {
+                  if (moment(date) >= moment().subtract(1, 'day')) {
+                    setDateValue(date);
+                    setModalOpen(false);
+                  }
+                }}>
+                <Text>선택하기</Text>
+              </Button>
+            </ButtonArea>
+          </ModalContainer>
+        </ModalBackground>
+      </Modal>
+    </>
   );
 };
 
 export default CalendarPage;
 
-type ArrowProps = {
-  direction: string;
+const CalendarTitleButton = styled.TouchableOpacity`
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`;
+
+const CalendarTitleText = styled.Text``;
+
+const CalendarArrowButton = styled.View`
+  width: 20px;
+  height: 20px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+`;
+
+type HeaderComponentProps = {
+  dateValue: string;
+  setModalOpen: Dispatch<SetStateAction<boolean>>;
+  fromNow: number;
 };
 
-const Arrow = ({direction}: ArrowProps) => {
+const HeaderComponent = ({
+  dateValue,
+  setModalOpen,
+  fromNow,
+}: HeaderComponentProps) => {
+  console.log('fromNow', fromNow);
   return (
-    <>
-      {direction === 'left' ? (
-        <Text>왼쪽 아이콘</Text>
-      ) : (
-        <Text>오른쪽 아이콘</Text>
-      )}
-    </>
-  );
-};
-
-const HeaderComponent = ({date}) => {
-  console.log(date);
-  return (
-    <>
-      {/* <Text>{date}</Text> */}
-      <TitleText>2022년 12월</TitleText>
-    </>
+    <CalendarTitleButton onPress={() => setModalOpen(true)}>
+      <CalendarArrowButton />
+      <CalendarTitleText>{dateValue}</CalendarTitleText>
+      <CalendarArrowButton>
+        <Text>➤</Text>
+      </CalendarArrowButton>
+      <Text style={{color: '#0063c9'}}>D - {fromNow + 1}</Text>
+    </CalendarTitleButton>
   );
 };
