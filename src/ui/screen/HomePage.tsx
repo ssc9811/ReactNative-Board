@@ -10,6 +10,7 @@ const HomeContainer = styled.View`
 
 const HomePage = () => {
   const navigation = useNavigation<MainNavigationProp>();
+  // 앱 내 권한 허용에 관한 화면 추가
   const ScrollLists = [
     {
       name: '배달의민족 Status Animation',
@@ -58,11 +59,11 @@ const HomePage = () => {
       },
     },
     {
-      name: '달력',
+      name: '달력(라이브러리)',
       onPress: () => {
-        navigation.navigate('Calendar');
+        navigation.navigate('CalendarLibrary');
       },
-      bgColor: 'yellow',
+      bgColor: 'black',
     },
   ];
 

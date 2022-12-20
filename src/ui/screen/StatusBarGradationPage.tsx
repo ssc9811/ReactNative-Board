@@ -3,13 +3,13 @@ import {
   Animated,
   NativeScrollEvent,
   NativeSyntheticEvent,
+  Platform,
   StatusBar,
   Text,
 } from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import styled, {css} from 'styled-components/native';
 import {AppIcon, AppIcons} from '../components/icons';
-import GradationBottom from '../../assets/images/icons/GradationBottom.svg';
 import {getStatusBarHeight} from 'react-native-status-bar-height';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {MainContainer} from '../components';
@@ -91,7 +91,7 @@ const StatusBarGradationPage = () => {
   StatusBar.setTranslucent(true);
   StatusBar.setBackgroundColor('transparent');
   if (STATUS_EVENT) {
-    StatusBar.setTranslucent(true);
+    // StatusBar.setTranslucent(true);
     // StatusBar.setBarStyle('default');
     StatusBar.setBarStyle('light-content');
   } else {
@@ -109,13 +109,11 @@ const StatusBarGradationPage = () => {
 
   useEffect(() => {
     if (spot < 280) {
-      console.log('spot < 280');
       Animated.timing(titleShowAnimation, {
         toValue: 0,
         useNativeDriver: true,
       }).start();
     } else {
-      console.log('spot > 280');
       Animated.timing(titleShowAnimation, {
         toValue: 1,
         useNativeDriver: true,
@@ -123,22 +121,20 @@ const StatusBarGradationPage = () => {
     }
   }, [spot]);
 
-  // const insets = useSafeAreaInsets();
+  const insets = useSafeAreaInsets();
 
-  // console.log('StatusBar.currentHeight', StatusBar.currentHeight);
-  // console.log('getStatusBarHeight()', getStatusBarHeight());
-  // console.log('insets', insets.top);
-
-  // const boxInterpolation = titleShowAnimation.interpolate({
-  //   inputRange: [0, 1],
-  //   outputRange: ['rgb(90,210,244)', 'rgb(224,82,99)'],
-  // });
-  // const animatedStyle = {
-  //   backgroundColor: boxInterpolation,
-  // };
+  if (Platform.OS === 'android') {
+    console.log('Android StatusBar.currentHeight', StatusBar.currentHeight);
+    console.log('Android getStatusBarHeight()', getStatusBarHeight()); // 필요 없음, insets 사용이 더 유리
+    console.log('Android insets', insets); // android 는 top만
+  } else {
+    console.log('iOS StatusBar.currentHeight', StatusBar.currentHeight); // null
+    console.log('iOS getStatusBarHeight()', getStatusBarHeight()); // 필요 없음, insets 사용이 더 유리
+    console.log('iOS insets', insets);
+  }
 
   return (
-    <MainContainer>
+    <MainContainer isNotch={false}>
       <>
         <StatusBar animated={true} />
         <HeaderContainer>

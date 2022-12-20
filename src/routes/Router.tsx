@@ -10,7 +10,7 @@ import PickerPage from '../ui/screen/PickerPage';
 import AnimationPage from '../ui/screen/AnimationPage';
 import PhotoWithTimestampPage from '../ui/screen/PhotoWithTimestampPage';
 import FirebaseTestPage from '../ui/screen/FirebaseTestPage';
-import CalendarPage from '../ui/screen/CalendarPage';
+import CalendarLibraryPage from '../ui/screen/CalendarLibraryPage';
 
 const Router = () => {
   return (
@@ -46,7 +46,10 @@ const MainStackNavigator = () => {
         component={PhotoWithTimestampPage}
       />
       <MainStack.Screen name="FirebaseTest" component={FirebaseTestPage} />
-      <MainStack.Screen name="Calendar" component={CalendarPage} />
+      <MainStack.Screen
+        name="CalendarLibrary"
+        component={CalendarLibraryPage}
+      />
     </MainStack.Navigator>
   );
 };

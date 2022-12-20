@@ -10,6 +10,7 @@ export type MainStackParamList = {
   PhotoWithTimestamp: undefined;
   FirebaseTest: undefined;
   Calendar: undefined;
+  CalendarLibrary: undefined;
 };
 
 export type MainNavigationProp = NativeStackNavigationProp<MainStackParamList>;
