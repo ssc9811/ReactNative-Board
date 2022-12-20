@@ -11,6 +11,7 @@ import AnimationPage from '../ui/screen/AnimationPage';
 import PhotoWithTimestampPage from '../ui/screen/PhotoWithTimestampPage';
 import FirebaseTestPage from '../ui/screen/FirebaseTestPage';
 import CalendarLibraryPage from '../ui/screen/CalendarLibraryPage';
+import CalendarCustomPage from '../ui/screen/CalendarCustomPage';
 
 const Router = () => {
   return (
@@ -49,6 +50,10 @@ const MainStackNavigator = () => {
       <MainStack.Screen
         name="CalendarLibrary"
         component={CalendarLibraryPage}
+      />
+      <MainStack.Screen
+        name={'CalendarCustom'}
+        component={CalendarCustomPage}
       />
     </MainStack.Navigator>
   );

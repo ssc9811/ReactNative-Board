@@ -9,7 +9,7 @@ export type MainStackParamList = {
   Animation: undefined;
   PhotoWithTimestamp: undefined;
   FirebaseTest: undefined;
-  Calendar: undefined;
+  CalendarCustom: undefined;
   CalendarLibrary: undefined;
 };
 

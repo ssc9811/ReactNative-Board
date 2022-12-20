@@ -14,56 +14,44 @@ const HomePage = () => {
   const ScrollLists = [
     {
       name: '배달의민족 Status Animation',
-      onPress: () => {
-        navigation.navigate('StatusBarGradation');
-        // navigation.navigate(this.name); this를 사용할 순 없나 ?
-      },
+      onPress: () => navigation.navigate('StatusBarGradation'),
       bgColor: 'yellow',
     },
     {
       name: 'Naver 지도',
-      onPress: () => {
-        navigation.navigate('Map');
-      },
+      onPress: () => navigation.navigate('Map'),
     },
     {
       name: '시간 선택 Picker',
-      onPress: () => {
-        navigation.navigate('Picker');
-      },
+      onPress: () => navigation.navigate('Picker'),
       bgColor: 'yellow',
     },
     {
       name: 'Figure Animation',
-      onPress: () => {
-        navigation.navigate('FigureAnimation');
-      },
+      onPress: () => navigation.navigate('FigureAnimation'),
       bgColor: 'black',
     },
     {
       name: 'Animation 연습',
-      onPress: () => {
-        navigation.navigate('Animation');
-      },
+      onPress: () => navigation.navigate('Animation'),
     },
     {
       name: '사진에 timestamp 기록',
-      onPress: () => {
-        navigation.navigate('PhotoWithTimestamp');
-      },
+      onPress: () => navigation.navigate('PhotoWithTimestamp'),
     },
     {
       name: 'FirebaseTest',
-      onPress: () => {
-        navigation.navigate('FirebaseTest');
-      },
+      onPress: () => navigation.navigate('FirebaseTest'),
     },
     {
       name: '달력(라이브러리)',
-      onPress: () => {
-        navigation.navigate('CalendarLibrary');
-      },
+      onPress: () => navigation.navigate('CalendarLibrary'),
       bgColor: 'black',
+    },
+    {
+      name: '달력(커스텀)',
+      onPress: () => navigation.navigate('CalendarCustom'),
+      bgColor: 'yellow',
     },
   ];
 
