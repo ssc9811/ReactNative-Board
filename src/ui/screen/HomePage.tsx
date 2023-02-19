@@ -19,7 +19,7 @@ const HomeTabArea = styled.View`
 `;
 
 const HomeType = {
-  All: '전체',
+  ALL: '전체',
   PLAN: '예정',
   ING: '진행중',
   DONE: '완료',
@@ -28,7 +28,7 @@ const HomeType = {
 const HomePage = () => {
   const navigation = useNavigation<MainNavigationProp>();
 
-  const [selectedTab, setSelectedTab] = useState<string>(HomeType.All);
+  const [selectedTab, setSelectedTab] = useState<string>(HomeType.ALL);
 
   // 앱 내 권한 허용에 관한 화면 추가
   const PageLists = [
@@ -78,12 +78,12 @@ const HomePage = () => {
     <HomeContainer>
       <HomeTabArea>
         <BasicButton
-          text={HomeType.All}
-          bgColor={selectedTab === HomeType.All ? 'gray' : 'white'}
-          fontColor={selectedTab === HomeType.All ? 'white' : 'black'}
-          borderWidth={selectedTab === HomeType.All ? 0 : 1}
-          borderColor={selectedTab === HomeType.All ? 'white' : 'gray'}
-          onPress={() => setSelectedTab(HomeType.All)}
+          text={HomeType.ALL}
+          bgColor={selectedTab === HomeType.ALL ? 'gray' : 'white'}
+          fontColor={selectedTab === HomeType.ALL ? 'white' : 'black'}
+          borderWidth={selectedTab === HomeType.ALL ? 0 : 1}
+          borderColor={selectedTab === HomeType.ALL ? 'white' : 'gray'}
+          onPress={() => setSelectedTab(HomeType.ALL)}
         />
         <BasicButton
           text={HomeType.PLAN}
@@ -111,25 +111,41 @@ const HomePage = () => {
         />
       </HomeTabArea>
       <ScrollView>
-        {PageLists.map(list => (
+        {PageLists.map((list, idx) => (
           <>
-            {selectedTab === HomeType.All &&
+            {selectedTab === HomeType.ALL &&
               (list.type === HomeType.DONE ||
                 HomeType.ING ||
                 HomeType.PLAN) && (
-                <ScrollList text={list.name} onPress={list.onPress} />
+                <ScrollList
+                  key={`Home_ALL_${idx}`}
+                  text={list.name}
+                  onPress={list.onPress}
+                />
               )}
 
             {selectedTab === HomeType.DONE && list.type === HomeType.DONE && (
-              <ScrollList text={list.name} onPress={list.onPress} />
+              <ScrollList
+                key={`Home_DONE_${idx}`}
+                text={list.name}
+                onPress={list.onPress}
+              />
             )}
 
             {selectedTab === HomeType.ING && list.type === HomeType.ING && (
-              <ScrollList text={list.name} onPress={list.onPress} />
+              <ScrollList
+                key={`Home_ING_${idx}`}
+                text={list.name}
+                onPress={list.onPress}
+              />
             )}
 
             {selectedTab === HomeType.PLAN && list.type === HomeType.PLAN && (
-              <ScrollList text={list.name} onPress={list.onPress} />
+              <ScrollList
+                key={`Home_PLAN_${idx}`}
+                text={list.name}
+                onPress={list.onPress}
+              />
             )}
           </>
         ))}
