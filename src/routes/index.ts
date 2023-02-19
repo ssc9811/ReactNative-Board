@@ -11,6 +11,7 @@ export type MainStackParamList = {
   FirebaseTest: undefined;
   CalendarCustom: undefined;
   CalendarLibrary: undefined;
+  TranslucentTest: undefined;
 };
 
 export type MainNavigationProp = NativeStackNavigationProp<MainStackParamList>;

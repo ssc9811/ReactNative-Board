@@ -1,76 +1,137 @@
 import {useNavigation} from '@react-navigation/native';
-import React, {useEffect} from 'react';
-import {ScrollView, StatusBar, Text} from 'react-native';
+import React, {useState} from 'react';
+import {ScrollView} from 'react-native';
 import styled from 'styled-components/native';
 import {MainNavigationProp} from '../../routes';
+import {windowWidth, windowHeight} from '../../utils/globalStyle/styleDefine';
+import BasicButton from '../components/button/BasicButton';
 
-const HomeContainer = styled.View`
+const HomeContainer = styled.SafeAreaView`
   background-color: #fff;
+  width: ${windowWidth}px;
+  height: ${windowHeight}px;
 `;
+
+const HomeTabArea = styled.View`
+  width: ${windowWidth}px;
+  flex-direction: row;
+  justify-content: space-around;
+`;
+
+const HomeType = {
+  All: '전체',
+  PLAN: '예정',
+  ING: '진행중',
+  DONE: '완료',
+};
 
 const HomePage = () => {
   const navigation = useNavigation<MainNavigationProp>();
+
+  const [selectedTab, setSelectedTab] = useState<string>(HomeType.All);
+
   // 앱 내 권한 허용에 관한 화면 추가
-  const ScrollLists = [
+  const PageLists = [
     {
       name: '배달의민족 Status Animation',
       onPress: () => navigation.navigate('StatusBarGradation'),
-      bgColor: 'yellow',
+      type: HomeType.ING,
     },
     {
       name: 'Naver 지도',
       onPress: () => navigation.navigate('Map'),
+      type: HomeType.PLAN,
     },
     {
       name: '시간 선택 Picker',
       onPress: () => navigation.navigate('Picker'),
-      bgColor: 'yellow',
+      type: HomeType.DONE,
     },
     {
       name: 'Figure Animation',
       onPress: () => navigation.navigate('FigureAnimation'),
-      bgColor: 'black',
-    },
-    {
-      name: 'Animation 연습',
-      onPress: () => navigation.navigate('Animation'),
+      type: HomeType.DONE,
     },
     {
       name: '사진에 timestamp 기록',
       onPress: () => navigation.navigate('PhotoWithTimestamp'),
+      type: HomeType.PLAN,
     },
     {
       name: 'FirebaseTest',
       onPress: () => navigation.navigate('FirebaseTest'),
+      type: HomeType.PLAN,
     },
     {
       name: '달력(라이브러리)',
       onPress: () => navigation.navigate('CalendarLibrary'),
-      bgColor: 'black',
+      type: HomeType.DONE,
     },
     {
       name: '달력(커스텀)',
       onPress: () => navigation.navigate('CalendarCustom'),
-      bgColor: 'yellow',
+      type: HomeType.ING,
     },
   ];
 
-  useEffect(() => {
-    navigation.isFocused();
-    StatusBar.setBarStyle('dark-content');
-  }, []);
-
   return (
     <HomeContainer>
-      <Text>흰색 : 시작 X || 노랑 : 진행중 || 검정 : 완료</Text>
+      <HomeTabArea>
+        <BasicButton
+          text={HomeType.All}
+          bgColor={selectedTab === HomeType.All ? 'gray' : 'white'}
+          fontColor={selectedTab === HomeType.All ? 'white' : 'black'}
+          borderWidth={selectedTab === HomeType.All ? 0 : 1}
+          borderColor={selectedTab === HomeType.All ? 'white' : 'gray'}
+          onPress={() => setSelectedTab(HomeType.All)}
+        />
+        <BasicButton
+          text={HomeType.PLAN}
+          bgColor={selectedTab === HomeType.PLAN ? 'gray' : 'white'}
+          fontColor={selectedTab === HomeType.PLAN ? 'white' : 'black'}
+          borderWidth={selectedTab === HomeType.PLAN ? 0 : 1}
+          borderColor={selectedTab === HomeType.PLAN ? 'white' : 'gray'}
+          onPress={() => setSelectedTab(HomeType.PLAN)}
+        />
+        <BasicButton
+          text={HomeType.ING}
+          bgColor={selectedTab === HomeType.ING ? 'gray' : 'white'}
+          fontColor={selectedTab === HomeType.ING ? 'white' : 'black'}
+          borderWidth={selectedTab === HomeType.ING ? 0 : 1}
+          borderColor={selectedTab === HomeType.ING ? 'white' : 'gray'}
+          onPress={() => setSelectedTab(HomeType.ING)}
+        />
+        <BasicButton
+          text={HomeType.DONE}
+          bgColor={selectedTab === HomeType.DONE ? 'gray' : 'white'}
+          fontColor={selectedTab === HomeType.DONE ? 'white' : 'black'}
+          borderWidth={selectedTab === HomeType.DONE ? 0 : 1}
+          borderColor={selectedTab === HomeType.DONE ? 'white' : 'gray'}
+          onPress={() => setSelectedTab(HomeType.DONE)}
+        />
+      </HomeTabArea>
       <ScrollView>
-        {ScrollLists.map((list, idx) => (
-          <ScrollList
-            text={list.name}
-            onPress={list.onPress}
-            key={idx}
-            bgColor={list.bgColor}
-          />
+        {PageLists.map(list => (
+          <>
+            {selectedTab === HomeType.All &&
+              (list.type === HomeType.DONE ||
+                HomeType.ING ||
+                HomeType.PLAN) && (
+                <ScrollList text={list.name} onPress={list.onPress} />
+              )}
+
+            {selectedTab === HomeType.DONE && list.type === HomeType.DONE && (
+              <ScrollList text={list.name} onPress={list.onPress} />
+            )}
+
+            {selectedTab === HomeType.ING && list.type === HomeType.ING && (
+              <ScrollList text={list.name} onPress={list.onPress} />
+            )}
+
+            {selectedTab === HomeType.PLAN && list.type === HomeType.PLAN && (
+              <ScrollList text={list.name} onPress={list.onPress} />
+            )}
+          </>
         ))}
       </ScrollView>
     </HomeContainer>
@@ -90,18 +151,13 @@ type ScrollListAreaProps = {
 const ScrollListArea = styled.TouchableOpacity<ScrollListAreaProps>`
   border: solid 1px black;
   padding: 8px;
-  border-radius: 12px;
+  border-radius: 8px;
   background-color: ${props => props.bgColor};
 `;
 
-type ScrollListTextProps = {
-  color: string;
-};
-
-const ScrollListText = styled.Text<ScrollListTextProps>`
-  font-size: 18px;
-  font-weight: 700;
-  color: ${props => props.color};
+const ScrollListText = styled.Text`
+  font-size: 16px;
+  font-weight: 600;
   text-align: center;
 `;
 
@@ -115,9 +171,7 @@ const ScrollList = ({text, onPress, bgColor = 'white'}: ScrollListParams) => {
   return (
     <ScrollListContainer>
       <ScrollListArea onPress={onPress} bgColor={bgColor}>
-        <ScrollListText color={bgColor === 'black' ? 'white' : 'black'}>
-          {text}
-        </ScrollListText>
+        <ScrollListText>{text}</ScrollListText>
       </ScrollListArea>
     </ScrollListContainer>
   );

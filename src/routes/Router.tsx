@@ -7,7 +7,6 @@ import HomePage from '../ui/screen/HomePage';
 import FigureAnimationPage from '../ui/screen/FigureAnimationPage';
 import MapPage from '../ui/screen/MapPage';
 import PickerPage from '../ui/screen/PickerPage';
-import AnimationPage from '../ui/screen/AnimationPage';
 import PhotoWithTimestampPage from '../ui/screen/PhotoWithTimestampPage';
 import FirebaseTestPage from '../ui/screen/FirebaseTestPage';
 import CalendarLibraryPage from '../ui/screen/CalendarLibraryPage';
@@ -25,7 +24,11 @@ const MainStack = createStackNavigator<MainStackParamList>();
 const MainStackNavigator = () => {
   return (
     <MainStack.Navigator initialRouteName="Home">
-      <MainStack.Screen name={'Home'} component={HomePage} />
+      <MainStack.Screen
+        name={'Home'}
+        component={HomePage}
+        options={{headerShown: false}}
+      />
       <MainStack.Screen
         name={'StatusBarGradation'}
         component={StatusBarGradationPage}
@@ -36,11 +39,6 @@ const MainStackNavigator = () => {
       <MainStack.Screen
         name={'FigureAnimation'}
         component={FigureAnimationPage}
-      />
-      <MainStack.Screen
-        name={'Animation'}
-        component={AnimationPage}
-        options={{headerShown: false}}
       />
       <MainStack.Screen
         name={'PhotoWithTimestamp'}

@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {
   Animated,
+  FlatList,
   NativeScrollEvent,
   NativeSyntheticEvent,
   Platform,
@@ -14,6 +15,7 @@ import {getStatusBarHeight} from 'react-native-status-bar-height';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {MainContainer} from '../components';
 import {windowWidth} from '../../utils/globalStyle/styleDefine';
+import {useIsFocused, useNavigation} from '@react-navigation/native';
 
 const HeaderContainer = styled.View`
   position: absolute;
@@ -76,67 +78,90 @@ type EmptyBoxProps = {
   bgColor: string;
 };
 
-const EmptyBox = styled.View<EmptyBoxProps>`
+const EmptyBox = styled.TouchableOpacity<EmptyBoxProps>`
   width: ${windowWidth};
   height: 200px;
   background-color: ${props => props.bgColor};
 `;
 
 const StatusBarGradationPage = () => {
+  console.log('StatusBarGradationPage');
+  const navigation = useNavigation();
   const scrollRef = useRef<ScrollView | null>(null);
   const [spot, setSpot] = useState<number>(0);
+  // const handleDayOnScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
+  //   const scrollMovementDirectionScrollMovement: number = Math.round(
+  //     e.nativeEvent.contentOffset.y,
+  //   );
+
+  //   setSpot(scrollMovementDirectionScrollMovement);
+  // };
   const STATUS_EVENT = spot < 300;
   const titleShowAnimation = useRef(new Animated.Value(0)).current;
 
-  StatusBar.setTranslucent(true);
-  StatusBar.setBackgroundColor('transparent');
-  if (STATUS_EVENT) {
-    // StatusBar.setTranslucent(true);
-    // StatusBar.setBarStyle('default');
-    StatusBar.setBarStyle('light-content');
-  } else {
-    // StatusBar.setTranslucent(false);
-    StatusBar.setBarStyle('dark-content');
-  }
-
-  const handleDayOnScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
-    const scrollMovementDirectionScrollMovement: number = Math.round(
-      e.nativeEvent.contentOffset.y,
-    );
-
-    setSpot(scrollMovementDirectionScrollMovement);
-  };
-
+  const isFocused = useIsFocused();
   useEffect(() => {
-    if (spot < 280) {
-      Animated.timing(titleShowAnimation, {
-        toValue: 0,
-        useNativeDriver: true,
-      }).start();
-    } else {
-      Animated.timing(titleShowAnimation, {
-        toValue: 1,
-        useNativeDriver: true,
-      }).start();
+    if (isFocused) {
+      StatusBar.setTranslucent(true);
+      StatusBar.setBackgroundColor('transparent');
+      StatusBar.setBarStyle('light-content');
     }
-  }, [spot]);
+  }, [isFocused]);
 
-  const insets = useSafeAreaInsets();
+  // const handleDayOnScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
+  //   const scrollMovementDirectionScrollMovement: number = Math.round(
+  //     e.nativeEvent.contentOffset.y,
+  //   );
 
-  if (Platform.OS === 'android') {
-    console.log('Android StatusBar.currentHeight', StatusBar.currentHeight);
-    console.log('Android getStatusBarHeight()', getStatusBarHeight()); // 필요 없음, insets 사용이 더 유리
-    console.log('Android insets', insets); // android 는 top만
-  } else {
-    console.log('iOS StatusBar.currentHeight', StatusBar.currentHeight); // null
-    console.log('iOS getStatusBarHeight()', getStatusBarHeight()); // 필요 없음, insets 사용이 더 유리
-    console.log('iOS insets', insets);
-  }
+  //   setSpot(scrollMovementDirectionScrollMovement);
+  // };
+
+  // useEffect(() => {
+  //   if (spot <= 280) {
+  //     // Animated.timing(titleShowAnimation, {
+  //     //   toValue: 0,
+  //     //   useNativeDriver: true,
+  //     // }).start();
+  //     setBarStyle('light-content');
+  //     Animated.timing(barColorAnim, {
+  //       useNativeDriver: false,
+  //       duration: 300,
+  //       toValue: 0,
+  //     }).start();
+  //   } else {
+  //     // Animated.timing(titleShowAnimation, {
+  //     //   toValue: 1,
+  //     //   useNativeDriver: true,
+  //     // }).start();
+  //     setBarStyle('dark-content');
+  //     Animated.timing(barColorAnim, {
+  //       useNativeDriver: false,
+  //       duration: 300,
+  //       toValue: 1,
+  //     }).start();
+  //   }
+  // }, [spot]);
+
+  // const insets = useSafeAreaInsets();
+
+  const AnimatedStatusBar = Animated.createAnimatedComponent(StatusBar);
+
+  const barColorAnim = useRef(new Animated.Value(0)).current;
+  const barColor = barColorAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['transparent', 'white'],
+  });
+  const [barStyle, setBarStyle] = useState('light-content');
 
   return (
     <MainContainer isNotch={false}>
       <>
-        <StatusBar animated={true} />
+        <AnimatedStatusBar
+          animated={true}
+          backgroundColor={barColor}
+          // barStyle={barStyle}
+          translucent={true}
+        />
         <HeaderContainer>
           <HeaderIcons hasStatusBar={STATUS_EVENT}>
             <HeaderLeft>
@@ -159,33 +184,42 @@ const StatusBarGradationPage = () => {
           </HeaderIcons>
         </HeaderContainer>
 
-        <ScrollView ref={scrollRef} onScroll={handleDayOnScroll}>
-          <ImageContainer>
-            <ExampleImage
-              resizeMode={'contain'}
-              source={{
-                uri: 'https://cdn-icons-png.flaticon.com/512/5511/5511354.png',
-              }}
-            />
-            <ImageBackground>
-              <AppIcons
-                icon={AppIcon.GradationTop}
-                containerWidth={windowWidth}
-                containerHeight={150}
-              />
-              <AppIcons
-                icon={AppIcon.GradationBottom}
-                containerWidth={windowWidth}
-                containerHeight={150}
-              />
-            </ImageBackground>
-          </ImageContainer>
+        <FlatList
+          data={null}
+          ListHeaderComponent={() => (
+            <>
+              <ImageContainer>
+                <ExampleImage
+                  resizeMode={'contain'}
+                  source={{
+                    uri: 'https://cdn-icons-png.flaticon.com/512/5511/5511354.png',
+                  }}
+                />
+                <ImageBackground>
+                  <AppIcons
+                    icon={AppIcon.GradationTop}
+                    containerWidth={windowWidth}
+                    containerHeight={150}
+                  />
+                  <AppIcons
+                    icon={AppIcon.GradationBottom}
+                    containerWidth={windowWidth}
+                    containerHeight={150}
+                  />
+                </ImageBackground>
+              </ImageContainer>
 
-          <EmptyBox bgColor="#a29bfe" />
-          <EmptyBox bgColor="#6c5ce7" />
-          <EmptyBox bgColor="#fd79a8" />
-          <EmptyBox bgColor="#e84393" />
-        </ScrollView>
+              <EmptyBox
+                bgColor="#a29bfe"
+                onPress={() => navigation.navigate('TranslucentTest')}
+              />
+              <EmptyBox bgColor="#6c5ce7" />
+              <EmptyBox bgColor="#fd79a8" />
+              <EmptyBox bgColor="#e84393" />
+            </>
+          )}
+          renderItem={() => <></>}
+        />
       </>
     </MainContainer>
   );
