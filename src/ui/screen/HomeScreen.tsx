@@ -25,7 +25,7 @@ const HomeType = {
   DONE: '완료',
 };
 
-const HomePage = () => {
+const HomeScreen = () => {
   const navigation = useNavigation<MainNavigationProp>();
 
   const [selectedTab, setSelectedTab] = useState<string>(HomeType.ALL);
@@ -154,7 +154,7 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default HomeScreen;
 
 const ScrollListContainer = styled.View`
   padding: 20px 50px;
@@ -165,7 +165,7 @@ type ScrollListAreaProps = {
 };
 
 const ScrollListArea = styled.TouchableOpacity<ScrollListAreaProps>`
-  border: solid 1px black;
+  border: solid 1px gray;
   padding: 8px;
   border-radius: 8px;
   background-color: ${props => props.bgColor};

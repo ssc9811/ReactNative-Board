@@ -5,7 +5,7 @@ import {LocaleConfig} from 'react-native-calendars';
 import styled from 'styled-components/native';
 import moment, {MomentInput} from 'moment';
 import DatePicker from 'react-native-date-picker';
-import {windowWidth} from '../../utils/globalStyle/styleDefine';
+import {windowWidth} from '../../../utils/globalStyle/styleDefine';
 
 const CalenderContainer = styled.View``;
 

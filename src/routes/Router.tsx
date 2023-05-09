@@ -2,15 +2,15 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 import {MainStackParamList} from '.';
-import StatusBarGradationPage from '../ui/screen/StatusBarGradationPage';
-import HomePage from '../ui/screen/HomePage';
-import FigureAnimationPage from '../ui/screen/FigureAnimationPage';
-import MapPage from '../ui/screen/MapPage';
-import PickerPage from '../ui/screen/PickerPage';
-import PhotoWithTimestampPage from '../ui/screen/PhotoWithTimestampPage';
-import FirebaseTestPage from '../ui/screen/FirebaseTestPage';
-import CalendarLibraryPage from '../ui/screen/CalendarLibraryPage';
-import CalendarCustomPage from '../ui/screen/CalendarCustomPage';
+import StatusBarGradationPage from '../ui/screen/features/StatusBarGradationPage';
+import FigureAnimationPage from '../ui/screen/features/FigureAnimationPage';
+import MapPage from '../ui/screen/features/MapPage';
+import PickerPage from '../ui/screen/features/PickerPage';
+import PhotoWithTimestampPage from '../ui/screen/features/PhotoWithTimestampPage';
+import FirebaseTestPage from '../ui/screen/features/FirebaseTestPage';
+import CalendarLibraryPage from '../ui/screen/features/CalendarLibraryPage';
+import CalendarCustomPage from '../ui/screen/features/CalendarCustomPage';
+import HomeScreen from '../ui/screen/HomeScreen';
 
 const Router = () => {
   return (
@@ -26,7 +26,7 @@ const MainStackNavigator = () => {
     <MainStack.Navigator initialRouteName="Home">
       <MainStack.Screen
         name={'Home'}
-        component={HomePage}
+        component={HomeScreen}
         options={{headerShown: false}}
       />
       <MainStack.Screen

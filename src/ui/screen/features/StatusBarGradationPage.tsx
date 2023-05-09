@@ -1,21 +1,10 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {
-  Animated,
-  FlatList,
-  NativeScrollEvent,
-  NativeSyntheticEvent,
-  Platform,
-  StatusBar,
-  Text,
-} from 'react-native';
+import {Animated, FlatList, StatusBar, Text} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import styled, {css} from 'styled-components/native';
-import {AppIcon, AppIcons} from '../components/icons';
-import {getStatusBarHeight} from 'react-native-status-bar-height';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {MainContainer} from '../components';
-import {windowWidth} from '../../utils/globalStyle/styleDefine';
 import {useIsFocused, useNavigation} from '@react-navigation/native';
+import {AppIcon, AppIcons, MainContainer} from '../../components';
+import {windowWidth} from '../../../utils/globalStyle/styleDefine';
 
 const HeaderContainer = styled.View`
   position: absolute;
@@ -97,7 +86,6 @@ const StatusBarGradationPage = () => {
   //   setSpot(scrollMovementDirectionScrollMovement);
   // };
   const STATUS_EVENT = spot < 300;
-  const titleShowAnimation = useRef(new Animated.Value(0)).current;
 
   const isFocused = useIsFocused();
   useEffect(() => {
