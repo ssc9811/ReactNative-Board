@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React, {useState} from 'react';
 import {Button, Text} from 'react-native';
 import DatePicker from 'react-native-date-picker';
@@ -16,6 +17,9 @@ const TitleText = styled.Text`
 
 const PickerPage = () => {
   const [date, setDate] = useState(new Date());
+
+  console.log(new Date());
+  console.log(moment());
 
   return (
     <PickerContainer>

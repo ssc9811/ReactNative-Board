@@ -3,8 +3,6 @@ import {Platform} from 'react-native';
 import {EdgeInsets, useSafeAreaInsets} from 'react-native-safe-area-context';
 import styled, {css} from 'styled-components/native';
 
-// 노치 보이게 안보이게 설정, iOS & Android 둘 다 사용 가능하도록
-
 type MainContainerAreaProps = {
   isNotch: boolean;
   insets: EdgeInsets;
