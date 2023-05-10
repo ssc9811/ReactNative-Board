@@ -1,23 +1,15 @@
-import {Dimensions, Platform} from 'react-native';
+import {Dimensions} from 'react-native';
 import {initialWindowMetrics} from 'react-native-safe-area-context';
 import styled from 'styled-components/native';
 
 export const windowWidth = Dimensions.get('window').width;
 export const windowHeight = Dimensions.get('window').height;
 
-const insetsTop =
-  Platform.OS === 'android'
-    ? 0
-    : initialWindowMetrics
-    ? initialWindowMetrics.insets.top
-    : 0;
+const insetsTop = initialWindowMetrics ? initialWindowMetrics.insets.top : 0;
 
-export const insetsBottom =
-  Platform.OS === 'android'
-    ? 0
-    : initialWindowMetrics
-    ? initialWindowMetrics.insets.bottom
-    : 0;
+const insetsBottom = initialWindowMetrics
+  ? initialWindowMetrics.insets.bottom
+  : 0;
 
 interface MainContainerProps {
   bgColor?: string;
@@ -25,7 +17,7 @@ interface MainContainerProps {
   paddingBottom?: number;
 }
 
-export const MainContainer = styled.View<MainContainerProps>`
+export const FullContainer = styled.View<MainContainerProps>`
   position: relative;
   flex: 1;
   width: ${windowWidth}px;

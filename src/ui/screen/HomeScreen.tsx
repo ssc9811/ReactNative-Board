@@ -3,16 +3,11 @@ import React, {useState} from 'react';
 import {FlatList} from 'react-native';
 import styled from 'styled-components/native';
 import {MainNavigationProp} from '../../routes';
-import {windowWidth, windowHeight} from '../../utils/globalStyle/styleDefine';
-import BasicButton from '../components/button/BasicButton';
-
-const HomeContainer = styled.SafeAreaView`
-  background-color: #fff;
-  width: ${windowWidth}px;
-  height: ${windowHeight}px;
-`;
+import {windowWidth, FullContainer} from '../../utils/globalStyle/styleDefine';
+import {BasicButton} from '../components';
 
 const HomeTabArea = styled.View`
+  padding: 12px 0px;
   width: ${windowWidth}px;
   flex-direction: row;
   justify-content: space-around;
@@ -33,12 +28,12 @@ const HomeScreen = () => {
   // 앱 내 권한 허용에 관한 화면 추가
   const PageLists = [
     {
-      name: '배달의민족 Status Animation',
+      name: '배달의민족 StatusBar Animation',
       onPress: () => navigation.navigate('StatusBarGradation'),
       type: HomeType.ING,
     },
     {
-      name: 'Naver 지도',
+      name: 'Naver 지도 API',
       onPress: () => navigation.navigate('Map'),
       type: HomeType.PLAN,
     },
@@ -75,7 +70,7 @@ const HomeScreen = () => {
   ];
 
   return (
-    <HomeContainer>
+    <FullContainer>
       <HomeTabArea>
         <BasicButton
           text={HomeType.ALL}
@@ -136,7 +131,7 @@ const HomeScreen = () => {
           </>
         )}
       />
-    </HomeContainer>
+    </FullContainer>
   );
 };
 

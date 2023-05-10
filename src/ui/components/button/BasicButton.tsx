@@ -40,7 +40,7 @@ interface BasicButtonPropsT
   borderColor?: string;
 }
 
-const BasicButton1 = ({
+export const BasicButton = ({
   text,
   width = 70,
   height = 40,
@@ -50,7 +50,6 @@ const BasicButton1 = ({
   bgColor = 'none',
   ...rest
 }: BasicButtonPropsT) => {
-  console.log('rest.fontColor', rest.fontColor);
   return (
     <ButtonContainer
       width={width}
@@ -70,5 +69,3 @@ const BasicButton1 = ({
     </ButtonContainer>
   );
 };
-
-export default BasicButton1;

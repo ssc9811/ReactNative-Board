@@ -23,16 +23,15 @@ const Router = () => {
 const MainStack = createStackNavigator<MainStackParamList>();
 const MainStackNavigator = () => {
   return (
-    <MainStack.Navigator initialRouteName="Home">
-      <MainStack.Screen
-        name={'Home'}
-        component={HomeScreen}
-        options={{headerShown: false}}
-      />
+    <MainStack.Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        headerShown: false,
+      }}>
+      <MainStack.Screen name={'Home'} component={HomeScreen} />
       <MainStack.Screen
         name={'StatusBarGradation'}
         component={StatusBarGradationPage}
-        options={{headerShown: false}}
       />
       <MainStack.Screen name={'Map'} component={MapPage} />
       <MainStack.Screen name={'Picker'} component={PickerPage} />
