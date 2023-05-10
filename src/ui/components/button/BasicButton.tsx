@@ -1,6 +1,7 @@
-import {Text, ColorValue} from 'react-native';
+import {TouchableOpacityProps, TouchableOpacity} from 'react-native';
 import React from 'react';
 import styled, {css} from 'styled-components/native';
+import {CustomText, CustomTextProps} from '../text/CustomText';
 
 interface ButtonAreaProps {
   width: number;
@@ -9,125 +10,81 @@ interface ButtonAreaProps {
   bgColor: string;
   borderColor: string;
   borderWidth: number;
+  alignItems: React.CSSProperties['alignItems'];
+  justifyContent: React.CSSProperties['justifyContent'];
 }
 
-const ButtonArea = styled.TouchableOpacity<ButtonAreaProps>`
-  align-items: center;
-  justify-content: center
-    ${({width, height, borderRadius, bgColor, borderColor, borderWidth}) => {
-      return css`
-        width: ${width}px;
-        height: ${height}px;
-        border-radius: ${borderRadius}px;
-        background-color: ${bgColor};
-        border-color: ${borderColor};
-        border-width: ${borderWidth}px;
-      `;
-    }};
+const ButtonContainer = styled(TouchableOpacity)<ButtonAreaProps>`
+  ${({
+    width,
+    height,
+    borderRadius,
+    bgColor,
+    borderColor,
+    borderWidth,
+    alignItems,
+    justifyContent,
+  }) => {
+    return css`
+      width: ${width}px;
+      height: ${height}px;
+      border-radius: ${borderRadius}px;
+      background-color: ${bgColor};
+      border-color: ${borderColor};
+      border-width: ${borderWidth}px;
+      align-items: ${alignItems};
+      justify-content: ${justifyContent};
+    `;
+  }};
 `;
 
-interface BasicButtonProps {
+interface BasicButtonPropsT
+  extends TouchableOpacityProps,
+    Omit<CustomTextProps, 'children'> {
   text: string;
-  color?: string;
-  fontSize?: number | undefined;
-  fontWeight?:
-    | 'normal'
-    | 'bold'
-    | '100'
-    | '200'
-    | '300'
-    | '400'
-    | '500'
-    | '600'
-    | '700'
-    | '800'
-    | '900'
-    | undefined;
-  textAlign?: 'auto' | 'left' | 'right' | 'center' | 'justify' | undefined;
-  onPress: () => void;
   width?: number;
   height?: number;
   borderRadius?: number;
   bgColor?: string;
   fontColor?: string;
-  borderColor?: string;
   borderWidth?: number;
+  borderColor?: string;
+  alignItems?: React.CSSProperties['alignItems'];
+  justifyContent?: React.CSSProperties['justifyContent'];
 }
 
-const BasicButton = ({
+const BasicButton1 = ({
   text,
-  fontSize = 14,
-  fontWeight,
-  textAlign,
-  onPress,
   width = 70,
   height = 40,
   borderRadius = 12,
   borderColor = 'none',
   borderWidth = 0,
   bgColor = 'none',
-  fontColor = 'none',
-}: BasicButtonProps) => {
+  alignItems = 'center',
+  justifyContent = 'center',
+  ...rest
+}: BasicButtonPropsT) => {
   return (
-    <>
-      <ButtonArea
-        width={width}
-        height={height}
-        borderRadius={borderRadius}
-        bgColor={bgColor}
-        borderColor={borderColor}
-        borderWidth={borderWidth}
-        onPress={onPress}>
-        <CustomText
-          color={fontColor}
-          fontSize={fontSize}
-          fontWeight={fontWeight}
-          textAlign={textAlign}>
-          {text}
-        </CustomText>
-      </ButtonArea>
-    </>
+    <ButtonContainer
+      width={width}
+      height={height}
+      borderRadius={borderRadius}
+      bgColor={bgColor}
+      borderWidth={borderWidth}
+      borderColor={borderColor}
+      alignItems={alignItems}
+      justifyContent={justifyContent}
+      {...rest}>
+      <CustomText
+        color={rest.fontColor}
+        fontSize={rest.fontSize}
+        fontWeight={rest.fontWeight}
+        textAlign={rest.textAlign}>
+        {text}
+      </CustomText>
+    </ButtonContainer>
   );
 };
 
-export default BasicButton;
-
-interface CustomTextProps {
-  children: string;
-  color?: ColorValue | undefined;
-  fontSize?: number | undefined;
-  fontWeight?:
-    | 'normal'
-    | 'bold'
-    | '100'
-    | '200'
-    | '300'
-    | '400'
-    | '500'
-    | '600'
-    | '700'
-    | '800'
-    | '900'
-    | undefined;
-  textAlign?: 'auto' | 'left' | 'right' | 'center' | 'justify' | undefined;
-}
-
-const CustomText = ({
-  children,
-  color,
-  fontSize,
-  fontWeight,
-  textAlign,
-}: CustomTextProps) => {
-  return (
-    <Text
-      style={{
-        color: color,
-        fontSize: fontSize,
-        fontWeight: fontWeight,
-        textAlign: textAlign,
-      }}>
-      {children}
-    </Text>
-  );
-};
+export default BasicButton1;

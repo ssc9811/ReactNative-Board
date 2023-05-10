@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
-import {ScrollView} from 'react-native';
+import {FlatList} from 'react-native';
 import styled from 'styled-components/native';
 import {MainNavigationProp} from '../../routes';
 import {windowWidth, windowHeight} from '../../utils/globalStyle/styleDefine';
@@ -110,46 +110,32 @@ const HomeScreen = () => {
           onPress={() => setSelectedTab(HomeType.DONE)}
         />
       </HomeTabArea>
-      <ScrollView>
-        {PageLists.map((list, idx) => (
+      <FlatList
+        data={PageLists}
+        keyExtractor={(_, index) => `home key__${index}`}
+        renderItem={({item}) => (
           <>
             {selectedTab === HomeType.ALL &&
-              (list.type === HomeType.DONE ||
+              (item.type === HomeType.DONE ||
                 HomeType.ING ||
                 HomeType.PLAN) && (
-                <ScrollList
-                  key={`Home_ALL_${idx}`}
-                  text={list.name}
-                  onPress={list.onPress}
-                />
+                <ScrollList text={item.name} onPress={item.onPress} />
               )}
 
-            {selectedTab === HomeType.DONE && list.type === HomeType.DONE && (
-              <ScrollList
-                key={`Home_DONE_${idx}`}
-                text={list.name}
-                onPress={list.onPress}
-              />
+            {selectedTab === HomeType.DONE && item.type === HomeType.DONE && (
+              <ScrollList text={item.name} onPress={item.onPress} />
             )}
 
-            {selectedTab === HomeType.ING && list.type === HomeType.ING && (
-              <ScrollList
-                key={`Home_ING_${idx}`}
-                text={list.name}
-                onPress={list.onPress}
-              />
+            {selectedTab === HomeType.ING && item.type === HomeType.ING && (
+              <ScrollList text={item.name} onPress={item.onPress} />
             )}
 
-            {selectedTab === HomeType.PLAN && list.type === HomeType.PLAN && (
-              <ScrollList
-                key={`Home_PLAN_${idx}`}
-                text={list.name}
-                onPress={list.onPress}
-              />
+            {selectedTab === HomeType.PLAN && item.type === HomeType.PLAN && (
+              <ScrollList text={item.name} onPress={item.onPress} />
             )}
           </>
-        ))}
-      </ScrollView>
+        )}
+      />
     </HomeContainer>
   );
 };
