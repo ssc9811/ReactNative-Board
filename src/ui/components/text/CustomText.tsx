@@ -1,7 +1,7 @@
-import {Text} from 'react-native';
+import {Text, TextStyle} from 'react-native';
 import React from 'react';
 
-export interface CustomTextProps {
+export interface CustomTextProps extends TextStyle {
   children: string;
   color?: string;
   fontSize?: number;
@@ -26,7 +26,7 @@ export const CustomText = ({
   color = 'black',
   fontSize = 14,
   fontWeight = '500',
-  textAlign = 'center',
+  ...rest
 }: CustomTextProps) => {
   return (
     <Text
@@ -34,7 +34,7 @@ export const CustomText = ({
         color: color,
         fontSize: fontSize,
         fontWeight: fontWeight,
-        textAlign: textAlign,
+        ...rest,
       }}>
       {children}
     </Text>

@@ -1,25 +1,26 @@
 ## component
 
-- [ ] Button
+- [x] Button
 
-  - [ ] 색상 설정 가능
-  - [ ] 크기 설정 가능
-  - [ ] radius 값
-  - [ ] onPress 가능
-  - [ ] onPress 없을때 클릭 안되도록
-  - [ ] 내부 Text
-  - [ ] 내부 Text 색상
-  - [ ] 내부 text 설정
+  - [x] 색상 설정 가능
+  - [x] 크기 설정 가능
+  - [x] radius 값
+  - [x] onPress 가능 => TouchableOpacity 상속받아서 직접 적용 가능
+  - [x] onPress 없을때 클릭 안되도록 => TouchableOpacity 상속받아서 직접 적용 가능
+  - [x] 내부 Text
+  - [x] 내부 Text 색상
+  - [x] 내부 text 설정
         <br>
         <br>
 
-- [ ] CustomText
+- [x] CustomText
 
-  - [ ] 색상 설정 가능
-  - [ ] 크기 설정 가능
-  - [ ] font-family
-  - [ ] font-weight
-  - [ ] font style 변경 가능
+  - [x] 색상 설정 가능
+  - [x] 크기 설정 가능
+  - [x] font-family => ...rest 활용해서 적용
+  - [x] font-weight
+  - [x] font style 변경 가능
+  - [x] default props 설정
         <br>
         <br>
 

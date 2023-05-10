@@ -10,21 +10,12 @@ interface ButtonAreaProps {
   bgColor: string;
   borderColor: string;
   borderWidth: number;
-  alignItems: React.CSSProperties['alignItems'];
-  justifyContent: React.CSSProperties['justifyContent'];
 }
 
 const ButtonContainer = styled(TouchableOpacity)<ButtonAreaProps>`
-  ${({
-    width,
-    height,
-    borderRadius,
-    bgColor,
-    borderColor,
-    borderWidth,
-    alignItems,
-    justifyContent,
-  }) => {
+  align-items: center;
+  justify-content: center;
+  ${({width, height, borderRadius, bgColor, borderColor, borderWidth}) => {
     return css`
       width: ${width}px;
       height: ${height}px;
@@ -32,8 +23,6 @@ const ButtonContainer = styled(TouchableOpacity)<ButtonAreaProps>`
       background-color: ${bgColor};
       border-color: ${borderColor};
       border-width: ${borderWidth}px;
-      align-items: ${alignItems};
-      justify-content: ${justifyContent};
     `;
   }};
 `;
@@ -49,8 +38,6 @@ interface BasicButtonPropsT
   fontColor?: string;
   borderWidth?: number;
   borderColor?: string;
-  alignItems?: React.CSSProperties['alignItems'];
-  justifyContent?: React.CSSProperties['justifyContent'];
 }
 
 const BasicButton1 = ({
@@ -61,10 +48,9 @@ const BasicButton1 = ({
   borderColor = 'none',
   borderWidth = 0,
   bgColor = 'none',
-  alignItems = 'center',
-  justifyContent = 'center',
   ...rest
 }: BasicButtonPropsT) => {
+  console.log('rest.fontColor', rest.fontColor);
   return (
     <ButtonContainer
       width={width}
@@ -73,8 +59,6 @@ const BasicButton1 = ({
       bgColor={bgColor}
       borderWidth={borderWidth}
       borderColor={borderColor}
-      alignItems={alignItems}
-      justifyContent={justifyContent}
       {...rest}>
       <CustomText
         color={rest.fontColor}
