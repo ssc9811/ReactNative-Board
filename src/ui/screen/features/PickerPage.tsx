@@ -1,8 +1,7 @@
-import moment from 'moment';
 import React, {useState} from 'react';
-import {Button, Text} from 'react-native';
 import DatePicker from 'react-native-date-picker';
 import styled from 'styled-components/native';
+import {FullContainer} from '../../../utils/globalStyle/styleDefine';
 
 const PickerContainer = styled.View`
   border: solid 1px black;
@@ -18,48 +17,34 @@ const TitleText = styled.Text`
 const PickerPage = () => {
   const [date, setDate] = useState(new Date());
 
-  console.log(new Date());
-  console.log(moment());
-
   return (
-    <PickerContainer>
-      <TitleText>{"mode='date'"}</TitleText>
-      {/* <DatePicker date={date} onDateChange={setDate} /> */}
-      {/* <DatePicker
-        date={date}
-        onDateChange={setDate}
-        androidVariant="iosClone"
-      />
+    <FullContainer>
+      <PickerContainer>
+        <TitleText>{"mode='date'"}</TitleText>
 
-      <TitleText>{'androidVariant="iosClone"'}</TitleText>
-      <DatePicker
-        date={date}
-        onDateChange={setDate}
-        androidVariant="iosClone"
-      /> */}
+        <DatePicker
+          date={date}
+          onDateChange={setDate}
+          androidVariant="iosClone"
+          mode={'date'}
+        />
 
-      <DatePicker
-        date={date}
-        onDateChange={setDate}
-        androidVariant="iosClone"
-        mode={'date'}
-      />
-
-      <TitleText>{"mode='datetime'"}</TitleText>
-      <DatePicker
-        date={date}
-        onDateChange={setDate}
-        androidVariant="iosClone"
-        mode={'datetime'}
-      />
-      <TitleText>{"mode='time'"}</TitleText>
-      <DatePicker
-        date={date}
-        onDateChange={setDate}
-        androidVariant="iosClone"
-        mode={'time'}
-      />
-    </PickerContainer>
+        <TitleText>{"mode='datetime'"}</TitleText>
+        <DatePicker
+          date={date}
+          onDateChange={setDate}
+          androidVariant="iosClone"
+          mode={'datetime'}
+        />
+        <TitleText>{"mode='time'"}</TitleText>
+        <DatePicker
+          date={date}
+          onDateChange={setDate}
+          androidVariant="iosClone"
+          mode={'time'}
+        />
+      </PickerContainer>
+    </FullContainer>
   );
 };
 
