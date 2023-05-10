@@ -24,11 +24,11 @@
         <br>
         <br>
 
-- [ ] MainContainer
-  - [ ] AOS, iOS 둘다 사용 가능하도록 insets값 설정
-  - [ ] 배경 색상 선택 가능
-  - [ ] top, bottom 여백 지정 가능
-  - [ ] 화면 전체를 차지하도록 ( 여백으로 조절 가능 )
+- [x] MainContainer
+  - [x] AOS, iOS 둘다 사용 가능하도록 insets값 설정
+  - [x] 배경 색상 선택 가능
+  - [x] top, bottom 여백 지정 가능
+  - [x] 화면 전체를 차지하도록 ( 여백으로 조절 가능 )
         <br>
         <br>
 - [ ] Header

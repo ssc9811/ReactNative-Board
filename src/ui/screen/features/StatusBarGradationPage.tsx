@@ -5,6 +5,7 @@ import {
   windowWidth,
 } from '../../../utils/globalStyle/styleDefine';
 import styled from 'styled-components/native';
+import {Icons} from '../../components';
 
 const ColorBox = styled.View<{bgColor: string}>`
   width: ${windowWidth}px;
@@ -28,6 +29,7 @@ const StatusBarGradationPage = () => {
   return (
     <FullContainer paddingTop={0} paddingBottom={0}>
       <ScrollView>
+        <Icons.Back />
         <BaeminThumbnail
           source={require('../../../assets/images/baemin-image.png')}
         />
