@@ -1,4 +1,5 @@
-import Icon from 'react-native-vector-icons/Ionicons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import Feather from 'react-native-vector-icons/Feather';
 import React from 'react';
 // import styled from 'styled-components/native';
 // import {TouchableOpacity} from 'react-native';
@@ -10,7 +11,8 @@ import React from 'react';
 // `;
 
 export const Icons = {
-  Back: () => <Icon name="chevron-back-outline" size={30} color="black" />,
+  Back: () => <Ionicons name="chevron-back-outline" size={32} color="black" />,
+  More: () => <Feather name="more-vertical" size={32} color="black" />,
 } as const;
 
 // export const AppIcon = {

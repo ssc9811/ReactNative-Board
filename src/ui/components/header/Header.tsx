@@ -1,25 +1,45 @@
 import React from 'react';
 import styled from 'styled-components/native';
 
-// 자주 쓰이는 헤더를 조금 더 편하게 쓰기 위해
-
 const HeaderContainer = styled.View`
-  border: solid 1px black;
   padding: 12px 20px;
 `;
 
 const HeaderArea = styled.View`
-  justify-content: flex-start;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+const HeaderLeft = styled.View`
+  width: 33%;
+  align-items: flex-start;
+  justify-content: center;
+`;
+const HeaderCenter = styled.View`
+  width: 33%;
+  align-items: center;
+  justify-content: center;
+`;
+const HeaderRight = styled.View`
+  width: 33%;
+  align-items: flex-end;
+  justify-content: center;
 `;
 
 type HeaderProps = {
-  children: JSX.Element;
+  children?: JSX.Element;
+  left?: JSX.Element;
+  right?: JSX.Element;
 };
 
-export const Header = ({children}: HeaderProps) => {
+export const Header = ({children, left, right}: HeaderProps) => {
   return (
     <HeaderContainer>
-      <HeaderArea>{children}</HeaderArea>
+      <HeaderArea>
+        <HeaderLeft>{left}</HeaderLeft>
+        <HeaderCenter>{children}</HeaderCenter>
+        <HeaderRight>{right}</HeaderRight>
+      </HeaderArea>
     </HeaderContainer>
   );
 };
