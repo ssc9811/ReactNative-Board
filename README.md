@@ -1,6 +1,6 @@
 # RN
 
-### Toy Component
+### Toy Components
 
 - [x] Vector Icon
 - [x] Custom Text
@@ -8,7 +8,7 @@
 - [x] Button
 - [ ] Box
 
-### Toy Project
+### Toy Projects
 
 - [ ] StatusBar Animation
 - [x] Time Picker

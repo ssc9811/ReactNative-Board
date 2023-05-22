@@ -2,6 +2,7 @@ import {TouchableOpacityProps, TouchableOpacity} from 'react-native';
 import React from 'react';
 import styled, {css} from 'styled-components/native';
 import {CustomText, CustomTextProps} from '../text/CustomText';
+import {CW} from '../../../utils/globalStyle/styleDefine';
 
 interface ButtonAreaProps {
   width: number;
@@ -52,7 +53,7 @@ export const BasicButton = ({
 }: BasicButtonPropsT) => {
   return (
     <ButtonContainer
-      width={width}
+      width={CW(width)}
       height={height}
       borderRadius={borderRadius}
       bgColor={bgColor}

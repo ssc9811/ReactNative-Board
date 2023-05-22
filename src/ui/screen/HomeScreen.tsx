@@ -1,16 +1,20 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
-import {FlatList} from 'react-native';
+import {FlatList, useWindowDimensions} from 'react-native';
 import styled from 'styled-components/native';
 import {MainNavigationProp} from '../../routes';
-import {windowWidth, FullContainer} from '../../utils/globalStyle/styleDefine';
+import {
+  windowWidth,
+  FullContainer,
+  windowHeight,
+} from '../../utils/globalStyle/styleDefine';
 import {BasicButton} from '../components';
 
 const HomeTabArea = styled.View`
   padding: 12px 0px;
-  width: ${windowWidth}px;
   flex-direction: row;
   justify-content: space-around;
+  border: solid 1px black;
 `;
 
 const HomeType = {
@@ -68,6 +72,12 @@ const HomeScreen = () => {
       type: HomeType.ING,
     },
   ];
+
+  const {width, height} = useWindowDimensions();
+
+  console.log('useWindowDimensions', width, height);
+
+  console.log(windowWidth, windowHeight);
 
   return (
     <FullContainer>
