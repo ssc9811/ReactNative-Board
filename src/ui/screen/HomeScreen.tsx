@@ -10,7 +10,6 @@ const HomeTabArea = styled.View`
   padding: 12px 0px;
   flex-direction: row;
   justify-content: space-around;
-  border: solid 1px black;
 `;
 
 const HomeType = {
@@ -24,49 +23,49 @@ const HomeScreen = () => {
   const navigation = useNavigation<MainNavigationProp>();
   const isFocused = useIsFocused();
 
-  const [selectedTab, setSelectedTab] = useState<string>(HomeType.ALL);
+  const [selectedTab, setSelectedTab] = useState<string>(HomeType.PLAN);
 
   // 앱 내 권한 허용에 관한 화면 추가
   const PageLists = [
     {
-      name: '배달의민족 StatusBar Animation',
-      onPress: () => navigation.navigate('StatusBarGradation'),
-      type: HomeType.ING,
-    },
-    {
-      name: 'Naver 지도 API',
+      name: 'Naver map API',
       onPress: () => navigation.navigate('Map'),
       type: HomeType.PLAN,
     },
     {
-      name: '시간 선택 Picker',
+      name: 'Photo',
+      onPress: () => navigation.navigate('PhotoWithTimestamp'),
+      type: HomeType.PLAN,
+    },
+    {
+      name: 'Firebase',
+      onPress: () => navigation.navigate('FirebaseTest'),
+      type: HomeType.PLAN,
+    },
+    {
+      name: '배달의민족 StatusBar Animation',
+      onPress: () => navigation.navigate('StatusBarGradation'),
+      type: HomeType.DONE,
+    },
+    {
+      name: 'Picker(Vanilla)',
       onPress: () => navigation.navigate('Picker'),
+      type: HomeType.DONE,
+    },
+    {
+      name: '달력(Vanilla)',
+      onPress: () => navigation.navigate('CalendarCustom'),
+      type: HomeType.DONE,
+    },
+    {
+      name: '달력(Library)',
+      onPress: () => navigation.navigate('CalendarLibrary'),
       type: HomeType.DONE,
     },
     {
       name: 'Figure Animation',
       onPress: () => navigation.navigate('FigureAnimation'),
       type: HomeType.DONE,
-    },
-    {
-      name: '사진에 timestamp 기록',
-      onPress: () => navigation.navigate('PhotoWithTimestamp'),
-      type: HomeType.PLAN,
-    },
-    {
-      name: 'FirebaseTest',
-      onPress: () => navigation.navigate('FirebaseTest'),
-      type: HomeType.PLAN,
-    },
-    {
-      name: '달력(라이브러리)',
-      onPress: () => navigation.navigate('CalendarLibrary'),
-      type: HomeType.DONE,
-    },
-    {
-      name: '달력(커스텀)',
-      onPress: () => navigation.navigate('CalendarCustom'),
-      type: HomeType.ING,
     },
   ];
 
