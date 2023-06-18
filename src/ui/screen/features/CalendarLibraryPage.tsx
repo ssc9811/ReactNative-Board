@@ -5,9 +5,10 @@ import {LocaleConfig} from 'react-native-calendars';
 import styled from 'styled-components/native';
 import moment, {MomentInput} from 'moment';
 import DatePicker from 'react-native-date-picker';
-import {windowWidth} from '../../../utils/globalStyle/styleDefine';
-
-const CalenderContainer = styled.View``;
+import {
+  FullContainer,
+  windowWidth,
+} from '../../../utils/globalStyle/styleDefine';
 
 const ModalBackground = styled.View`
   flex: 1;
@@ -73,7 +74,7 @@ const CalendarPageLibrary = () => {
 
   return (
     <>
-      <CalenderContainer>
+      <FullContainer>
         <Calendar
           initialDate={moment(dateValue).format('yyyy-MM-DD')}
           theme={{
@@ -107,7 +108,7 @@ const CalendarPageLibrary = () => {
           )}
           enableSwipeMonths={true}
         />
-      </CalenderContainer>
+      </FullContainer>
 
       <Modal visible={modalOpen} transparent={true}>
         <ModalBackground>
