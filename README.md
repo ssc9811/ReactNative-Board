@@ -10,12 +10,13 @@
 
 ### Toy Projects
 
-- [ ] StatusBar Animation
+- [x] StatusBar Animation
 - [x] Time Picker
+- [x] Calendar (library)
+- [x] Calendar (vanilla)
+- [x] Figure Animation
 - [ ] Infinite Animation
 - [ ] Naver Map
-- [x] Calendar (library)
-- [ ] Calendar (vanilla)
 - [ ] Loading Animation
 - [ ] Double Click Event
 - [ ] Toggle Animation
