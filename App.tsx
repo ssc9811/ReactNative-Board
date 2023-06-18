@@ -7,6 +7,7 @@ const App = () => {
     if (Platform.OS === 'android') {
       StatusBar.setTranslucent(true);
     }
+    StatusBar.setBarStyle('dark-content');
   }, []);
   return <Router />;
 };

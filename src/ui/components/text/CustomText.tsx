@@ -2,7 +2,7 @@ import {Text, TextStyle} from 'react-native';
 import React from 'react';
 
 export interface CustomTextProps extends TextStyle {
-  children: string;
+  children: React.ReactNode;
   color?: string;
   fontSize?: number;
   fontWeight?:

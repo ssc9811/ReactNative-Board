@@ -1,13 +1,9 @@
-import {useNavigation} from '@react-navigation/native';
-import React, {useState} from 'react';
-import {FlatList, useWindowDimensions} from 'react-native';
+import {useIsFocused, useNavigation} from '@react-navigation/native';
+import React, {useEffect, useState} from 'react';
+import {FlatList, StatusBar} from 'react-native';
 import styled from 'styled-components/native';
 import {MainNavigationProp} from '../../routes';
-import {
-  windowWidth,
-  FullContainer,
-  windowHeight,
-} from '../../utils/globalStyle/styleDefine';
+import {FullContainer} from '../../utils/globalStyle/styleDefine';
 import {BasicButton} from '../components';
 
 const HomeTabArea = styled.View`
@@ -26,6 +22,7 @@ const HomeType = {
 
 const HomeScreen = () => {
   const navigation = useNavigation<MainNavigationProp>();
+  const isFocused = useIsFocused();
 
   const [selectedTab, setSelectedTab] = useState<string>(HomeType.ALL);
 
@@ -73,11 +70,11 @@ const HomeScreen = () => {
     },
   ];
 
-  const {width, height} = useWindowDimensions();
-
-  console.log('useWindowDimensions', width, height);
-
-  console.log(windowWidth, windowHeight);
+  useEffect(() => {
+    if (isFocused) {
+      StatusBar.setBarStyle('dark-content');
+    }
+  }, [isFocused]);
 
   return (
     <FullContainer>
