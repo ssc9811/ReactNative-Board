@@ -33,6 +33,11 @@ const HomeScreen = () => {
       type: HomeType.PLAN,
     },
     {
+      name: 'YearMonthDatePicker',
+      onPress: () => navigation.navigate('YearMonthDatePicker'),
+      type: HomeType.DONE,
+    },
+    {
       name: 'Photo',
       onPress: () => navigation.navigate('PhotoWithTimestamp'),
       type: HomeType.PLAN,

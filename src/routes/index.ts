@@ -5,6 +5,7 @@ export type MainStackParamList = {
   StatusBarGradation: undefined;
   Map: undefined;
   Picker: undefined;
+  YearMonthDatePicker: undefined;
   FigureAnimation: undefined;
   Animation: undefined;
   PhotoWithTimestamp: undefined;

@@ -11,6 +11,7 @@ import FirebaseTestPage from '../ui/screen/features/FirebaseTestPage';
 import CalendarLibraryPage from '../ui/screen/features/CalendarLibraryPage';
 import CalendarCustomPage from '../ui/screen/features/CalendarCustomPage';
 import HomeScreen from '../ui/screen/HomeScreen';
+import YearMonthDatePickerPage from '../ui/screen/features/YearMonthDatePickerPage';
 
 const Router = () => {
   return (
@@ -35,6 +36,10 @@ const MainStackNavigator = () => {
       />
       <MainStack.Screen name={'Map'} component={MapPage} />
       <MainStack.Screen name={'Picker'} component={PickerPage} />
+      <MainStack.Screen
+        name={'YearMonthDatePicker'}
+        component={YearMonthDatePickerPage}
+      />
       <MainStack.Screen
         name={'FigureAnimation'}
         component={FigureAnimationPage}
